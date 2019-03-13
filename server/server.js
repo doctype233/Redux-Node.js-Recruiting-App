@@ -55,5 +55,5 @@ app.get('/data', function (req, res) {
 })
 
 app.listen('8080', function () {
-    console.log('app is start at 8080')
+    console.log('app is start at port 8080')
 })
