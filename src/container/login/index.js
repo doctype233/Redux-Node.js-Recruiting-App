@@ -18,6 +18,9 @@ class Login extends Component {
                 <h2>登录界面</h2>
                 <WingBlank>
                     <WhiteSpace size='lg'/>
+                    <InputItem>用户名</InputItem>
+                    <InputItem>密码</InputItem>
+                    <WhiteSpace size='sm'/>
                     <Button type='primary'>登录</Button>
                     <WhiteSpace />
                     <Button type='primary' onClick={()=>{this.regist()}}>注册</Button>
