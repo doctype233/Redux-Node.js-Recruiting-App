@@ -6,9 +6,11 @@ import { Provider } from 'react-redux';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Login from '@/container/login';
 import Regist from '@/container/regist';
+import BossInfo from '@/container/bossinfo';
 import AuthRoute from '@/component/authRoute';
 import reducer from './reducer';
 import './config';
+import './index.css'
 
 
 const store = createStore(reducer, applyMiddleware(thunk))
@@ -19,8 +21,9 @@ ReactDom.render(
             <div>
                 <AuthRoute />
                 <Switch>
-                    <Route path='/login' component={Login}>登录</Route>
-                    <Route path='/regist' component={Regist}>注册</Route>
+                    <Route path='/login' component={Login}></Route>
+                    <Route path='/regist' component={Regist}></Route>
+                    <Route path='/bossinfo' component={BossInfo}></Route>
                 </Switch>
             </div>
         </BrowserRouter>

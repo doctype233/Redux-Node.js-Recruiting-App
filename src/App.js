@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {List} from 'antd-mobile';
 import {connect} from 'react-redux'; //获取外部参数的关键部分
 import {getUserData} from './auth.redux';
-const Item=List.Item;
 // const mapStateProps=(state)=>{//将state塞进props里面
 //     return {num:state}
 // }
