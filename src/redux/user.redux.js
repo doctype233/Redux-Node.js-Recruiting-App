@@ -1,9 +1,8 @@
 import axios from 'axios';
 import { getRedirectPath } from '@/util.js';
 
-const REGIST_SUCCESS = 'REGIST_SUCCESS';
+const AUTH_SUCCESS = 'AUTH_SUCCESS';
 const REGIST_ERROR = 'REGIST_ERROR';
-const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 const LOAD_DATA = "LOAD_DATA";
 
 const initState = {
@@ -16,10 +15,8 @@ const initState = {
 //reducer，state的最终改变来自reducer
 export function user(state = initState, action) {
     switch (action.type) {
-        case REGIST_SUCCESS:
-            return { ...state, isAuthor: true, ...action.data, redirectTo: getRedirectPath(action.data) }
-        case LOGIN_SUCCESS:
-            return { ...state, isAuthor: true, ...action.data, redirectTo: getRedirectPath(action.data) }
+        case AUTH_SUCCESS:
+            return { ...state, isAuth: true, ...action.data, redirectTo: getRedirectPath(action.data) }
         case REGIST_ERROR:
             return { ...state, isAuthor: false, msg: action.msg }
         case LOAD_DATA:
@@ -40,7 +37,7 @@ export function regist({ user, pwd, repeatPwd, type }) {
     return dispatch => {
         axios.post('/user/regist', { user, pwd, type }).then(res => {
             if (res.status === 200 && res.data.code == 0) {
-                dispatch(registSuccess({ user, pwd, type}))
+                dispatch(authSuccess({ user, pwd, type }))
             } else {
                 dispatch(errorMsg(res.data.msg))
             }
@@ -56,7 +53,7 @@ export function login({ user, pwd }) {
         axios.post('/user/login', { user, pwd }).then(res => {
             if (res.status === 200 && res.data.code == 0) {
                 console.log(res.data)
-                dispatch(loginSuccess(res.data.data))
+                dispatch(authSuccess(res.data.data))
             } else {
                 dispatch(errorMsg(res.data.msg))
             }
@@ -65,23 +62,29 @@ export function login({ user, pwd }) {
 }
 
 export function loadUserInfo(userinfo) {
-    return {userinfo,type:LOAD_DATA}
+    return { userinfo, type: LOAD_DATA }
 }
-export function update(info){
-    // dispatch=>{
 
-    // }
+export function update(info) {
+    console.log(info)
+    return dispatch => {
+        axios.post('/user/update',info).then(res=>{
+            if (res.status === 200 && res.data.code == 0) {
+                dispatch(authSuccess(res.data.data))
+            } else {
+                dispatch(errorMsg(res.data.msg))
+            }
+        })
+    }
 }
 
 function errorMsg(msg) {
     return { msg, type: REGIST_ERROR }
 }
 
-function registSuccess(data) {
-    console.log('1',data)
-    return { data, type: REGIST_SUCCESS }
+function authSuccess(obj) {
+    const{pwd,...data}=obj;
+    console.log(data)
+    return { data, type: AUTH_SUCCESS }
 }
 
-function loginSuccess(data) {
-    return { data, type: LOGIN_SUCCESS }
-}

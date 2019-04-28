@@ -2,3 +2,12 @@
     color: red;
     margin-left: 12px;
 }
+.am-tabs-bottom{
+    position: fixed;
+    bottom: 0;
+}
+.nav-bar .am-nav-navbar{
+    position: fixed;
+    top:0;
+    width:100%;
+}

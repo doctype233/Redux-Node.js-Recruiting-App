@@ -9,14 +9,11 @@ import {update} from '@/redux/user.redux';
     state=>state.user,
     {update}
 )
-class Bossinfo extends Component {
+class GeniusInfo extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            title:'',
-            company:'',
-            money:'',
-            desc:''
+            avatar:''
         }
         this.selectAvatar=this.selectAvatar.bind(this)
     }
@@ -42,10 +39,8 @@ class Bossinfo extends Component {
                     selectAvatar={this.selectAvatar}
                 />
                 <List renderHeader='职位发布'>
-                    <InputItem onChange={(v) => { this.onChange('title', v) }}>招聘职位</InputItem>
-                    <InputItem onChange={(v) => { this.onChange('company', v) }}>公司名称</InputItem>
-                    <InputItem onChange={(v) => { this.onChange('money', v) }}>薪资</InputItem>
-                    <TextareaItem title='职位要求' rows={3} autoHeight onChange={(v) => { this.onChange('desc', v) }}></TextareaItem>
+                    <InputItem onChange={(v) => { this.onChange('title', v) }}>求职岗位</InputItem>
+                    <TextareaItem title='个人简介' rows={3} autoHeight onChange={(v) => { this.onChange('desc', v) }}></TextareaItem>
                 </List>
                 <WhiteSpace/>
                 <Button type='primary' onClick={this.update}>保存</Button>
@@ -54,4 +49,4 @@ class Bossinfo extends Component {
     }
 }
 
-export default Bossinfo;
+export default GeniusInfo;
